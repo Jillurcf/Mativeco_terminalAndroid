@@ -11,6 +11,7 @@ import Button from "../../components/Button";
 import { SvgXml } from "react-native-svg";
 import { IconDown } from "../../assets/icon/icon";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 const stepImages = [
   require("../../assets/images/getAuthentic.png"),
@@ -35,7 +36,8 @@ const steps = [
   "Place the card HORIZONTALLY on the back of the phone",
  ];
 
-export default function UserFlowScreen({ navigation }: { navigation: any }) {
+export default function UserFlowScreen() {
+  const navigation = useNavigation()
   const renderItem = ({ item, index }: { item: string; index: number }) => (
     <View style={tw`items-center mb-6`}>
       {stepImages[index] && (

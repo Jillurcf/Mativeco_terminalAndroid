@@ -3,6 +3,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { ThemeProvider } from '../context/ThemeContext';
 import Routes from './Routs';
 import { StripeTerminalProvider } from '@stripe/stripe-terminal-react-native';

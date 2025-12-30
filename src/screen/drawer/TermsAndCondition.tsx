@@ -24,11 +24,11 @@ const HowDoesAppWork = ({ navigation }: { navigation: any }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={tw`px-[4%] mt-12`}>
                     <Text style={tw`font-RobotoBold text-primary`}>
-                        Use of Tap to Pay on iPhone
+                        Use of Tap to pay
                     </Text>
                     <Text style={tw`font-RobotoRegular text-primary mt-2`}>
 
-                        This feature allows you to accept contactless payments directly on a compatible iPhone (iPhone XS or later, iOS 16.4+).
+                        This feature allows you to accept contactless payments directly on a compatibleandroid (iPhone XS or later, iOS 16.4+).
                         You must have an active merchant account with a supported payment provider (e.g., Stripe, Square).
                         The app is intended solely for in-person, card-present transactions.
                     </Text>

@@ -40,7 +40,7 @@ function DrawerContent({ navigation, route }: any) {
     <SafeAreaView 
      style={[
     tw`flex-1`,
-    Platform.OS === 'android' ? { paddingTop: StatusBar.currentHeight } : {},
+    // Platform.OS === 'android' ? { paddingTop: StatusBar.currentHeight } : {},
   ]}
   edges={['top', 'left', 'right']}
     >

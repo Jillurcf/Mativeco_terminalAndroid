@@ -178,7 +178,7 @@ const TapToPay = ({ navigation }: { navigation: any }) => {
       // }
       const granted = locStatus === RESULTS.GRANTED;
       if (!granted) {
-        Alert.alert('Permission Denied', 'Enable Bluetooth, Location and NFC access in Settings');
+        Alert.alert('Permission Denied', 'Location and NFC access in Settings');
         return false;
       }
     }
@@ -314,7 +314,7 @@ const TapToPay = ({ navigation }: { navigation: any }) => {
 
         if (error) {
           console.log("Discovery Error+++++++++++++++++++", error.message);
-          Alert.alert("Discovery Error+++++++++++++++++++", error.message);
+          // Alert.alert("Discovery Error+++++++++++++++++++", error.message);
           retries++;
           await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 second before retry
           continue;
@@ -322,11 +322,11 @@ const TapToPay = ({ navigation }: { navigation: any }) => {
         const reader = discoveredReaders[0];
         setDiscoverReaderGet(reader);
 
-        console.log(reader, "readear+++++++++++++++++++")
+        // console.log(reader, "readear+++++++++++++++++++")
 
         if (!discoveredReaders || discoveredReaders.length === 0) {
           console.log("No reader found, retrying...");
-          Alert.alert("No reader found, retrying...");
+          // Alert.alert("No reader found, retrying...");
 
           retries++;
           await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 second before retry
@@ -339,7 +339,7 @@ const TapToPay = ({ navigation }: { navigation: any }) => {
           { reader, locationId },
           'tapToPay'
         );
-        Alert.alert(connectedReader, "connectReader")
+        // Alert.alert(connectedReader, "connectReader")
         if (connectError) {
           // Alert.alert('Connection Error', connectError.message);
           console.log("Connection Error+++++++++++++++++++", connectError.message);
@@ -552,9 +552,15 @@ const TapToPay = ({ navigation }: { navigation: any }) => {
         return;
       }
 
-      const connected =
-        readerConnected || (await handleDiscoverAndConnectReader());
-Alert.alert(connected, "connected================")
+      // const connected =
+      //   readerConnected || (await handleDiscoverAndConnectReader());
+      const connected = readerConnected || (await handleDiscoverAndConnectReader());
+      if (typeof connected !== 'boolean') {
+        console.error("Expected boolean but received", typeof connected);
+      }
+
+      // Alert.alert(connected, "connected================")
+
       if (!connected) {
         console.log("Reader not connected");
         return;
@@ -755,14 +761,14 @@ Alert.alert(connected, "connected================")
 
           <TButton
             disabled={!amount || isNaN(amount)} // Disable button if amount is invalid or empty
-            isLoading={isLoading && disconnectReaderGet} // Handle the loading state
+            isLoading={isLoading} // Handle the loading state
             onPress={handleTapToPay}
             containerStyle={tw`${!amount ? 'bg-gray-400' : 'bg-primary'} w-full my-4`} // Conditional background color
             title={isLoading && disconnectReaderGet ? 'Processing...' : 'Collect Payment'} // Title changes based on loading state
           />
 
         </View>
-        <NormalModal
+        {/* <NormalModal
           layerContainerStyle={tw`flex-1 justify-center animate-bounce`} // Ensure modal content aligns at the bottom
           containerStyle={tw`bg-black shadow-lg rounded-t-2xl p-6`} // Styling the modal itself
           visible={setUpErrorModalVisible}
@@ -817,7 +823,7 @@ Alert.alert(connected, "connected================")
               </View>
             </View>
           </View>
-        </NormalModal>
+        </NormalModal> */}
 
         <StatusBar backgroundColor={"#D8E7BC"} translucent={false} />
       </View>

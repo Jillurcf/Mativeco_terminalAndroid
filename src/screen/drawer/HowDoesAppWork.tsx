@@ -24,11 +24,11 @@ const HowDoesAppWork = ({ navigation }: { navigation: any }) => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View style={tw`px-[4%] mt-12`}>
                     <Text style={tw`font-RobotoBold text-primary`}>
-                        What is Tap to Pay on iPhone?
+                        What is Tap to Pay ?
                     </Text>
                     <Text style={tw`font-RobotoRegular text-primary mt-2`}>
 
-                        Tap to Pay on iPhone lets you accept contactless payments using just your iPhone — no extra hardware needed. Customers can simply hold their contactless credit/debit card or digital wallet (Apple Pay, Google Pay, etc.) near your iPhone to complete the payment securely.
+                        Tap to Pay  lets you accept contactless payments using just yourandroid — no extra hardware needed. Customers can simply hold their contactless credit/debit card or digital wallet (Apple Pay, Google Pay, etc.) near yourandroid to complete the payment securely.
                     </Text>
                 </View>
                 <View style={tw`px-[4%] mt-4`}>
@@ -38,7 +38,7 @@ const HowDoesAppWork = ({ navigation }: { navigation: any }) => {
                     <Text style={tw`font-RobotoRegular text-primary mt-2`}>
 
 
-                        An iPhone XS or later running iOS 16.4 or higher
+                        Anandroid XS or later running iOS 16.4 or higher
                         A verified merchant account with a supported payment provider (like Stripe, Square, etc.)
                         Your customer must use a contactless card or digital wallet
                     </Text>
@@ -49,7 +49,7 @@ const HowDoesAppWork = ({ navigation }: { navigation: any }) => {
                     </Text>
                     <Text style={tw`font-RobotoRegular text-primary mt-2`}>
 
-                        Tap to Pay on iPhone uses the same secure NFC technology as Apple Pay.
+                        Tap to Pay  uses the same secure NFC technology as Apple Pay.
                         Apple never stores card numbers on the device or Apple servers.
                         Every transaction is encrypted and requires Face ID, Touch ID, or passcode.
                     </Text>
@@ -74,7 +74,7 @@ const HowDoesAppWork = ({ navigation }: { navigation: any }) => {
                     <Text style={tw`font-RobotoRegular text-primary mt-2`}>
 
 
-                        You can’t use Tap to Pay on iPhone to process card-not-present transactions.
+                        You can’t use Tap to Pay  to process card-not-present transactions.
                         You cannot manually enter card info to simulate Tap to Pay.
                         You must only activate Tap to Pay during a checkout/payment session.
                         You must not store any payment card information.
@@ -86,8 +86,8 @@ const HowDoesAppWork = ({ navigation }: { navigation: any }) => {
                     </Text>
                     <Text style={tw`font-RobotoRegular text-primary mt-2`}>
                         Customer confirms the total.
-                        You present your iPhone to the customer.
-                        They tap their card or device near the top of your iPhone.
+                        You present yourandroid to the customer.
+                        They tap their card or device near the top of yourandroid.
                         You see a confirmation screen (success or error).
                         Optionally, send or print a receipt via your app.
                     </Text>

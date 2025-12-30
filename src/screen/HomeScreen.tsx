@@ -1,6 +1,10 @@
+
 // import { useNavigation, DrawerActions } from 'expo-router'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
-import React, { useEffect } from 'react'
+
+
+
+import React, { useEffect, useState } from 'react'
 import { Image, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { SvgXml } from 'react-native-svg'
 import tw from '../lib/tailwind'
@@ -9,15 +13,16 @@ import TButton from '../components/TButton'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 
+
 type Props = {}
 
 const HomeScreen = ({ route }) => {
   const navigation = useNavigation();
   const id = route?.params;
   console.log(id, "id from HomeScreen")
-
-  const [user, setUser] = React.useState<any>(null);
-  console.log(user?.name, "user+++++++=")
+ const [user, setUser] = useState<any>(null);
+ const [homeData, setHomeData] = React.useState()
+  console.log(homeData, "user+++++++=")
 
   useEffect(() => {
     const loadUserFromStorage = async () => {
@@ -49,7 +54,38 @@ const HomeScreen = ({ route }) => {
 
     loadUserFromStorage();
   }, []);
-  return (
+
+  console.log(user?.stripe_account_id, "user+++++++=")
+const merchant_id = user?.stripe_account_id;
+
+const fetchPayments = async () => {
+    if (!user?.stripe_account_id) {
+      console.log('❌ Merchant ID missing');
+      return;
+    }
+
+  
+
+    const url = `http://103.186.20.114:8084/api/get-dashboard-data?merchant_id=${merchant_id}`;
+
+    console.log('🌍 Fetching:', url);
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log('📌 Response:', data);
+      setHomeData(data?.data || []);
+    } catch (error) {
+      console.log('❌ API Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPayments();
+  }, [user?.stripe_account_id,]);
+
+
+   return (
     <SafeAreaView style={tw`flex-1 bg-secondary `}>
       <View style={tw`flex-1 bg-secondary p-[4%] `}>
         <View style={tw`flex-col  justify-between h-full`}>
@@ -79,25 +115,25 @@ const HomeScreen = ({ route }) => {
                 {/* Card 1 */}
                 <View style={tw`bg-secondary rounded-xl p-4 mr-2 w-40 shadow-lg`}>
                   <Text style={tw`text-center font-RobotoRegular text-primary text-sm`}>Today's Payment Account</Text>
-                  <Text style={tw`text-center font-RobotoRegular text-primary text-2xl font-bold`}>$100</Text>
+                  <Text style={tw`text-center font-RobotoRegular text-primary text-2xl font-bold`}>€{homeData?.today_payment_account}</Text>
                 </View>
 
                 {/* Card 2 */}
                 <View style={tw`bg-secondary rounded-xl p-4 ml-2 w-40 shadow-lg`}>
                   <Text style={tw`text-center font-RobotoRegular text-primary text-sm`}>Last Payment Amount</Text>
-                  <Text style={tw`text-center font-RobotoRegular text-primary text-2xl font-bold`}>$50</Text>
+                  <Text style={tw`text-center font-RobotoRegular text-primary text-2xl font-bold`}>€{homeData?.last_payment_account}</Text>
                 </View>
               </View>
 
               {/* Bottom Card */}
               <View style={tw`bg-secondary rounded-xl p-4 w-40 shadow-lg`}>
                 <Text style={tw`text-center text-primary font-RobotoRegular text-sm`}>Total Payments{'\n'}This Month</Text>
-                <Text style={tw`text-center font-RobotoRegular text-primary text-2xl font-bold`}>$15,000</Text>
+                <Text style={tw`text-center font-RobotoRegular text-primary text-2xl font-bold`}>€{homeData?.total_payment_in_this_month}</Text>
               </View>
             </View>
           </View>
           <View>
-            <TButton onPress={() => navigation?.navigate('TapToPay')} containerStyle={tw`bg-primary w-full`} titleStyle={tw`font-RobotoBold text-secondary`} title='Tap to Pay on iPhone' />
+            <TButton onPress={() => navigation?.navigate('TapToPay')} containerStyle={tw`bg-primary w-full`} titleStyle={tw`font-RobotoBold text-secondary`} title='Tap to Pay' />
           </View>
         </View>
         <StatusBar backgroundColor='#01503B' translucent={false} />
